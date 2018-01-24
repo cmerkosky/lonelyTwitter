@@ -56,6 +56,7 @@ public class LonelyTwitterActivity extends Activity {
 
 				Tweet tweet = new NormalTweet(text);
 				tweetList.add(tweet);
+				bodyText.setText("");
 
 				adapter.notifyDataSetChanged();
 
