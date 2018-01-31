@@ -1,3 +1,15 @@
+/*
+ * LonelyTwitterActivity
+ *
+ * Version 1.0
+ *
+ * January 30, 2018
+ *
+ * Copyright (c) 2018 Team X. CMPUT301. University of Alberta - All Rights Reserved.
+ * You may use, distribute, or modify this code under terms and conditions of the Code of Student Behaviour at University of Alberta.
+ * You can find a copy of the license in this project. Otherwise, please contact contact@abc.ca
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -27,6 +39,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * The main activity for the LonelyTwitter app
+ *
+ * @author colemerkosky
+ * @version 1.0
+ * @see Tweet
+ */
 public class LonelyTwitterActivity extends Activity {
 
 	private static final String FILENAME = "tweets.sav";
@@ -54,7 +73,7 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 
-				Tweet tweet = new NormalTweet(text);
+				Tweet tweet = new NormalTweet(text, new Date());
 				tweetList.add(tweet);
 				bodyText.setText("");
 
@@ -77,6 +96,7 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/** Called when the activity is started */
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -89,6 +109,9 @@ public class LonelyTwitterActivity extends Activity {
 		oldTweetsList.setAdapter(adapter);
 	}
 
+	/**
+	 * Loads the tweet list from a saved GSON file
+	 */
 	private void loadFromFile() {
 		try {
 			FileInputStream fis = openFileInput(FILENAME);
@@ -105,7 +128,10 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
-	
+
+	/**
+	 * Saves the tweet list to a GSON file
+	 */
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
@@ -125,6 +151,9 @@ public class LonelyTwitterActivity extends Activity {
 		}
 	}
 
+	/**
+	 * Resets the tweet list
+	 */
 	private void clearTweets(){
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
